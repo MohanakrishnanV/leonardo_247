@@ -94,7 +94,8 @@ Remember to consider your specific use case, anticipated traffic, and any additi
 
 Remember to activate the virtual environment `(source ~/sentry-venv/bin/activate)` every time you want to run Sentry or its related commands.
 
-- Creating `sentry run web` and `sentry run worker` as **systemd services**
+**5. Creating systemd services**
+- creating systemd service for `sentry run web`
     ```shell
     sudo nano /etc/systemd/system/sentry-web.service
     ```
@@ -114,7 +115,7 @@ Remember to activate the virtual environment `(source ~/sentry-venv/bin/activate
     [Install]
     WantedBy=multi-user.target
     ```
-
+- creating systemd service for `sentry run worker`
     ```shell
     sudo nano /etc/systemd/system/sentry-worker.service
     ```
@@ -135,7 +136,7 @@ Remember to activate the virtual environment `(source ~/sentry-venv/bin/activate
     [Install]
     WantedBy=multi-user.target
     ```
-    
+- creating systemd service for `sentry run cron`
     ```shell
     sudo nano /etc/systemd/system/sentry-cron.service
     ```
@@ -157,7 +158,7 @@ Remember to activate the virtual environment `(source ~/sentry-venv/bin/activate
     WantedBy=multi-user.target
     ```
     
-- Start the services and check for status
+- Starting the services and check for status
     ```shell
     sudo systemctl start sentry-web
     ```
@@ -176,6 +177,7 @@ Remember to activate the virtual environment `(source ~/sentry-venv/bin/activate
     ```shell
     sudo systemctl status sentry-cron
     ``` 
+- Enabling symlink for services
     ```shell
     sudo systemctl enable sentry-web
     ```
