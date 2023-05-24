@@ -1,4 +1,4 @@
-###System Requirement:
+**System Requirement:**
 
 1. **Instance Type:** It is recommended to use at least a t2.medium or similar instance type, which provides a balance between cost and performance. However, depending on your specific usage and requirements, you may need a larger instance type with more resources.
 2. **Operating System:** Sentry supports various operating systems, including Linux distributions like Ubuntu, CentOS, and Amazon Linux. Ensure that your EC2 instance is running a compatible Linux distribution.
@@ -10,10 +10,11 @@
 
 Remember to consider your specific use case, anticipated traffic, and any additional services you plan to integrate with Sentry. These requirements are a general guideline, and you may need to adjust them based on your specific needs.
 
-###Installation
+**Installation**
+
 *First ensure that the security group associated with the instance allows incoming connections on ports 22 (SSH), 80 (HTTP), and 443 (HTTPS).*
 
-#####1. Install and Set Up PostgreSQL (Database): 
+**1. Install and Set Up PostgreSQL (Database):**
 -   Install PostgreSQL server:
     ```shell
     sudo apt install -y postgresql
@@ -29,7 +30,7 @@ Remember to consider your specific use case, anticipated traffic, and any additi
     GRANT ALL PRIVILEGES ON DATABASE sentrydb TO sentryuser;
     \q
     ```
-#####2. Install and Configure Redis (Message Broker): 
+**2. Install and Configure Redis (Message Broker):**
 - Install Redis server:
     ```shell
     sudo apt install -y redis-server
@@ -46,7 +47,7 @@ Remember to consider your specific use case, anticipated traffic, and any additi
     ```shell
     sudo systemctl restart redis
     ```
-#####3. Create a Virtual Environment:
+**3. Create a Virtual Environment:**
 - Install the venv module if it's not already installed:
     ```shell
     sudo apt install -y python3-venv
@@ -63,7 +64,7 @@ Remember to consider your specific use case, anticipated traffic, and any additi
     ```shell
     source ~/sentry-venv/bin/activate
     ```
-#####4. Install Sentry and Dependencies:
+**4. Install Sentry and Dependencies:**
 - Installing dependencies within the virtual environment
     ```shell
     sudo apt install -y build-essential python3-dev libjpeg-dev zlib1g-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libtiff5-dev libjpeg8-dev liblcms2-dev libwebp-dev libyaml-dev libpq-dev libbz2-dev libreadline-dev libsqlite3-dev libncurses5-dev libncursesw5-dev libffi-dev libssl-dev libbz2-dev liblzma-dev zlib1g-dev uuid-dev libxml2-dev libxmlsec1-dev pkg-config
