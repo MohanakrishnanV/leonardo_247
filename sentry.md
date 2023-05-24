@@ -136,6 +136,27 @@ Remember to activate the virtual environment `(source ~/sentry-venv/bin/activate
     WantedBy=multi-user.target
     ```
     
+    ```shell
+    sudo nano /etc/systemd/system/sentry-cron.service
+    ```
+    
+    ```shell
+    [Unit]
+    Description=Sentry Service
+    After=network.target
+
+    [Service]
+    User=ubuntu
+    Group=ubuntu
+    WorkingDirectory=/home/ubuntu/sentry-venv/bin
+    ExecStart=/bin/bash -c "source /home/ubuntu/sentry-venv/bin/activate && sentry run cron"
+    Environment="PATH=/home/ubuntu/sentry-venv/bin"
+    Restart=always
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+    
 - Start the services and check for status
     ```shell
     sudo systemctl start sentry-web
@@ -144,14 +165,23 @@ Remember to activate the virtual environment `(source ~/sentry-venv/bin/activate
     sudo systemctl start sentry-worker
     ```
     ```shell
+    sudo systemctl start sentry-cron
+    ```
+    ```shell
     sudo systemctl status sentry-web
     ```
     ```shell
     sudo systemctl status sentry-worker
     ``` 
     ```shell
+    sudo systemctl status sentry-cron
+    ``` 
+    ```shell
     sudo systemctl enable sentry-web
     ```
     ```shell
     sudo systemctl enable sentry-worker
+    ``` 
+    ```shell
+    sudo systemctl enable sentry-cron
     ``` 
