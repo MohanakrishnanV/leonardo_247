@@ -90,6 +90,7 @@ Remember to consider your specific use case, anticipated traffic, and any additi
     ```shell
     sentry run web
     sentry run worker
+    sentry run cron
     ```
 
 Remember to activate the virtual environment `(source ~/sentry-venv/bin/activate)` every time you want to run Sentry or its related commands.
