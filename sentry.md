@@ -93,3 +93,65 @@ Remember to consider your specific use case, anticipated traffic, and any additi
     ```
 
 Remember to activate the virtual environment `(source ~/sentry-venv/bin/activate)` every time you want to run Sentry or its related commands.
+
+- Creating `sentry run web` and `sentry run worker` as **systemd services**
+    ```shell
+    sudo nano /etc/systemd/system/sentry-web.service
+    ```
+    ```shell
+    [Unit]
+    Description=Sentry Service
+    After=network.target
+
+    [Service]
+    User=ubuntu
+    Group=ubuntu
+    WorkingDirectory=/home/ubuntu/sentry-venv/bin
+    ExecStart=/bin/bash -c "source /home/ubuntu/sentry-venv/bin/activate && sentry run web"
+    Environment="PATH=/home/ubuntu/sentry-venv/bin"
+    Restart=always
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+
+    ```shell
+    sudo nano /etc/systemd/system/sentry-worker.service
+    ```
+    
+    ```shell
+    [Unit]
+    Description=Sentry Service
+    After=network.target
+
+    [Service]
+    User=ubuntu
+    Group=ubuntu
+    WorkingDirectory=/home/ubuntu/sentry-venv/bin
+    ExecStart=/bin/bash -c "source /home/ubuntu/sentry-venv/bin/activate && sentry run worker"
+    Environment="PATH=/home/ubuntu/sentry-venv/bin"
+    Restart=always
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+    
+- Start the services and check for status
+    ```shell
+    sudo systemctl start sentry-web
+    ```
+    ```shell
+    sudo systemctl start sentry-worker
+    ```
+    ```shell
+    sudo systemctl status sentry-web
+    ```
+    ```shell
+    sudo systemctl status sentry-worker
+    ``` 
+    ```shell
+    sudo systemctl enable sentry-web
+    ```
+    ```shell
+    sudo systemctl enable sentry-worker
+    ``` 
